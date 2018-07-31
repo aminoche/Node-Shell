@@ -1,13 +1,12 @@
 const request = require('request');
+const done = require('./done');
 
 module.exports = function(url) {
   request(url, function(error, response, body) {
     if (error) {
       throw error;
     } else {
-      process.stdout.write(response.statusCode + '\n');
-      process.stdout.write(body + '\n');
-      process.stdout.write('\nprompt > ');
+      done(response.statusCode + '\n' + body);
     }
   });
 };

@@ -2,7 +2,7 @@ const pwd = require('./pwd');
 const ls = require('./ls');
 const cat = require('./cat');
 const curl = require('./curl');
-
+const done = require('./done');
 //output a prompt
 process.stdout.write('prompt > ');
 
@@ -17,7 +17,7 @@ process.stdin.on('data', data => {
     .trim()
     .split(' ')
     .slice(1);
-  console.log('cmd', cmd, 'parameters', parameters, 'data', data);
+  console.log('cmd', cmd, 'parameters', parameters);
   if (cmd === 'pwd') {
     pwd();
   } else if (cmd === 'ls') {
@@ -27,7 +27,8 @@ process.stdin.on('data', data => {
   } else if (cmd === 'curl') {
     curl(parameters[0]);
   } else {
-    process.stdout.write('You typed: ' + cmd);
-    process.stdout.write('\nprompt > ');
+    done('You typed: ' + cmd);
   }
 });
+
+module.exports = done;
